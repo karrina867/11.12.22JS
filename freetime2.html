@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .image_container{
+            width: 20vw;
+            height: 20vw;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+            border: 1px solid black;
+        }
+        img{
+            width: 90%;
+            height: 60%;
+            border: 1px solid red;
+            object-fit: cover ;
+            object-position: center;
+         
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="image_container">
+        <img src="img1.jpg" alt="img">
+        <button id="left">назад</button>
+        <button id="right">вперёд</button>
+    </div>
+    <script>
+     let img = document.querySelector('img');
+      let degr =0; 
+        img.addEventListener('click',
+            function(){
+                degr += 45;
+                img.style.transform =`rotate(${degr}deg)`;
+
+            }
+        )
+
+        let numSlider = 1;
+        let pictures = ['img1.jpg','img2.jpg','img3.jpg'];
+       
+        document.querySelector('#left').addEventListener('click',function (){
+            moveSlide('left')
+        });
+        document.querySelector('#right').addEventListener('click',function (){
+            moveSlide('right')
+        });
+        function moveSlide(id){
+            switch(id){
+                case 'left':
+                    numSlider--;
+                    if(numSlider<1)
+                        numSlider = pictures.length;
+                        break;
+
+                    case 'right':
+                    numSlider++;
+                    if(numSlider>pictures.length)
+                        numSlider = 1;
+                        break;   
+            }
+            img.src = pictures[numSlider - 1];
+        }
+    </script>
+</body>
+</html>

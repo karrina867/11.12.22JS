@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .color{
+            background-color: red;
+        }
+        .block{
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fs{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <button>click</button>
+<!--1-->
+    <button onclick="alert('сообщение')">Кнопка</button>
+
+<!--2-->
+    <button onclick="changeColor()">Кнопка</button>
+
+    <div class="block">текст</div>
+
+    <script>
+        //события
+        //3
+      /* function changeColor(){
+            let el = document.querySelector('.block');
+            el.classList.toggle('color');
+        }*/
+        
+        //4
+       /* document.querySelector('button').onclick =  function changeColor(){
+            let el = document.querySelector('.block');
+            el.classList.toggle('color');
+        }
+*/
+        function fs(){
+            let el = document.querySelector('.block');
+            el.style.fontSize = '30px';
+        }
+        //нормальные рабочие способы:
+        let bt = document.querySelector('button');
+
+        bt.addEventListener('click',fs);
+
+        bt.addEventListener('click', function (){
+            let el = document.querySelector('.block');
+            el.classList.toggle('color');
+        });//2(3) параметра
+
+        bt.addEventListener('click', function (){
+            let el = document.querySelector('.block');
+            el.classList.toggle('fs');
+        });
+        bt.addEventListener('click',function(){
+            fs();
+            changeColor();
+        });
+
+        //удаление событий(не лутший способ)
+        let changeColor = function (){
+            let el = document.querySelector('.block');
+            el.classList.toggle('color');
+        }
+        bt.addEventListener('click',changeColor);
+
+        setTimeout(function(){
+            bt.removeEventListener('click',changeColor);
+        },3000)
+
+        //способ полутше
+        let count = 0; 
+
+         let changeColor1 = function (){
+         if(count ==0){
+            let el = document.querySelector('.block');
+            el.classList.toggle('color');
+         }
+           
+        }
+        setTimeout(function(){
+          count++;
+        },3000)
+
+
+        
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
